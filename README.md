@@ -43,8 +43,11 @@ quotes-service/
 ├── migrations/
 │   └── 001_create_quotes_table.sql
 ├── tests/
-│   ├── integration/
 │   └── unit/
+│       ├── service_test/              # Тесты для service слоя
+│       │   └── quote_service_test.go
+│       └── domain_test/              # Тесты для domain моделей
+│           └── quote_test.go
 ├── docker-compose.yml
 ├── Dockerfile
 ├── go.mod
