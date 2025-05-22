@@ -1,3 +1,57 @@
+# Мини-сервис “Цитатник”
+
+Микросервис для управления цитатами с использованием чистой архитектуры, PostgreSQL и современных практик разработки на Go.
+
+## ✨ Особенности
+
+- ✅ **Clean Architecture** - четкое разделение слоев
+- ✅ **PostgreSQL** с connection pooling
+- ✅ **Graceful Shutdown** - корректное завершение работы
+- ✅ **Backoff Strategy** - повторные попытки с экспоненциальной задержкой
+- ✅ **Context Timeouts** - контроль времени выполнения операций
+- ✅ **Structured Logging** - JSON логирование
+- ✅ **Health Check** - endpoint для мониторинга
+- ✅ **Docker Support** - контейнеризация
+- ✅ **Unit Tests** - покрытие тестами
+
+## 📁 Структура проекта
+
+```
+quotes-service/
+├── cmd/
+│   └── server/
+│       └── main.go              # Точка входа приложения
+├── internal/
+│   ├── domain/
+│   │   ├── quote.go             # Доменные модели
+│   │   └── repository.go        # Интерфейсы репозиториев
+│   ├── repository/
+│   │   └── postgres/
+│   │       └── quote_repository.go  # PostgreSQL репозиторий
+│   ├── service/
+│   │   └── quote_service.go     # Бизнес-логика
+│   ├── handler/
+│   │   └── quote_handler.go # HTTP обработчики
+│   │  
+│   ├── infrastructure/
+│   │   ├── database/
+│   │   │   └── postgres.go      # Подключение к БД
+│   │   └── logger/
+│   │       └── logger.go        # Логгер
+│   └── config/
+│       └── config.go            # Конфигурация
+├── migrations/
+│   └── 001_create_quotes_table.sql
+├── tests/
+│   ├── integration/
+│   └── unit/
+├── docker-compose.yml
+├── Dockerfile
+├── go.mod
+├── go.sum
+├── Makefile
+└── README.md
+```
 ## 🚀 Быстрый старт
 
 ### Вариант 1: Docker Compose (рекомендуется)
