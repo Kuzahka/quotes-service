@@ -90,14 +90,14 @@ func (h *QuoteHandler) GetQuotes(w http.ResponseWriter, r *http.Request) {
 		Author: r.URL.Query().Get("author"),
 	}
 
-	// Parse limit parameter
+	// Парсинг параметра "limit"
 	if limitStr := r.URL.Query().Get("limit"); limitStr != "" {
 		if limit, err := strconv.Atoi(limitStr); err == nil && limit > 0 {
 			filter.Limit = limit
 		}
 	}
 
-	// Parse offset parameter
+	// Парсинг оффсета
 	if offsetStr := r.URL.Query().Get("offset"); offsetStr != "" {
 		if offset, err := strconv.Atoi(offsetStr); err == nil && offset >= 0 {
 			filter.Offset = offset
@@ -182,7 +182,7 @@ func (h *QuoteHandler) HealthCheck(w http.ResponseWriter, r *http.Request) {
 		Uptime:    uptime,
 	}
 
-	// If database is down, return 503
+	// Если БД недоступна, возвращаем 503
 	if dbStatus == "disconnected" {
 		response.Status = "unhealthy"
 		h.sendResponse(w, http.StatusServiceUnavailable, Response{Data: response})
@@ -214,7 +214,7 @@ func (h *QuoteHandler) loggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
 
-		// Wrap ResponseWriter to capture status code
+		// Обертка для записи статуса ответа
 		ww := &responseWriter{ResponseWriter: w, statusCode: http.StatusOK}
 
 		next.ServeHTTP(ww, r)
@@ -251,7 +251,7 @@ func (h *QuoteHandler) recoveryMiddleware(next http.Handler) http.Handler {
 	})
 }
 
-// responseWriter wraps http.ResponseWriter to capture status code
+// кастомный ResponseWriter для записи статуса ответа
 type responseWriter struct {
 	http.ResponseWriter
 	statusCode int

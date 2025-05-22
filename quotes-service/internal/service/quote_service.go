@@ -33,7 +33,7 @@ func (s *QuoteService) CreateQuote(ctx context.Context, req domain.CreateQuoteRe
 		Text:   req.Quote,
 	}
 
-	// Add timeout for database operation
+	// Добавление метаданных
 	dbCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
 
@@ -48,7 +48,7 @@ func (s *QuoteService) CreateQuote(ctx context.Context, req domain.CreateQuoteRe
 }
 
 func (s *QuoteService) GetAllQuotes(ctx context.Context, filter domain.QuoteFilter) ([]*domain.Quote, error) {
-	// Set default limit if not specified
+	// Установка значений по умолчанию для фильтра
 	if filter.Limit <= 0 {
 		filter.Limit = 100 // Default limit
 	}

@@ -101,7 +101,7 @@ func TestCreateQuoteRequest_Validate(t *testing.T) {
 				if err != nil {
 					t.Errorf("Expected no error but got: %v", err)
 				}
-				// Check that whitespace was trimmed
+				// Проерка на trim
 				if tt.req.Author != "Test Author" || tt.req.Quote != "Test quote text" {
 					t.Errorf("Expected whitespace to be trimmed")
 				}
